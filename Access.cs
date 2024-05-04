@@ -1,4 +1,4 @@
-public class Access : UndergradView, ClassView
+public class Access
 {
 
 }
