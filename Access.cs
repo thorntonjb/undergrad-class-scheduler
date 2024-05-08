@@ -6,6 +6,7 @@ public class Access
 {
     private List<Courses> listOfGenEds = new List<Courses>();
     private List<Courses> listOfElectives = new List<Courses>();
+    private UndergradView
     Courses defaultCourse = new Courses();
 
     public Access()
