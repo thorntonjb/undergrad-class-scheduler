@@ -54,44 +54,56 @@ public class Access
     {
         int choice = 0;
         //string YesOrNo;
-        while (choice != 3 )
+        try
         {
-            Console.WriteLine("What type of class? Choose one below:");
-            Console.WriteLine(@"   1. General Education Class" + Environment.NewLine +
-                                "   2. Elective Class" + Environment.NewLine +
-                                "   3. Exit");
-            choice = int.Parse(Console.ReadLine());
-
-            switch (choice)
+            while (choice != 3 )
             {
-                case 1: // gened
-                    foreach (Courses course in listOfGenEds)
-                    {
-                        Console.WriteLine(course.ToString());
-                    }
+                Console.WriteLine("What type of class? Choose one below:");
+                Console.WriteLine(@"   1. General Education Class" + Environment.NewLine +
+                                    "   2. Elective Class" + Environment.NewLine +
+                                    "   3. Back");
+                choice = int.Parse(Console.ReadLine());
 
-                    findGenEdForUser();
-                    Console.WriteLine(Environment.NewLine + "Choose another class or exit!");
+                switch (choice)
+                {
+                    case 1: // gened
+                        foreach (Courses course in listOfGenEds)
+                        {
+                            Console.WriteLine(course.ToString());
+                        }
 
-                    continue;
-                case 2: // elective
-                    foreach (Courses course in listOfElectives)
-                    {
-                        Console.WriteLine(course.ToString());
-                    }
+                        findGenEdForUser();
+                        Console.WriteLine(Environment.NewLine + "Choose another class or exit!");
 
-                    findElectiveForUser();
-                    Console.WriteLine(Environment.NewLine + "Choose another class or exit!");
+                        continue;
+                    case 2: // elective
+                        foreach (Courses course in listOfElectives)
+                        {
+                            Console.WriteLine(course.ToString());
+                        }
 
-                    continue;
-                case 3: // exit
-                    Console.WriteLine("Bye bye!");
-                    break;
-                default: // QA-esque
-                    Console.WriteLine("Please enter a valid response. Thank you.");
-                    break;
-            } // end switch
-        } // end while
+                        findElectiveForUser();
+                        Console.WriteLine(Environment.NewLine + "Choose another class or exit!");
+
+                        continue;
+                    case 3: // exit
+                        Console.WriteLine("Bye bye!");
+                        break;
+                    default: // QA-esque
+                        Console.WriteLine("Please enter a valid response. Thank you.");
+                        break;
+                } // end switch
+            } // end while
+        }
+        catch (ArgumentException)
+        {
+            Console.WriteLine("Invalid Input. Try Again.");
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("Error.");
+        }
+
     }
 
     public Courses findGenEdForUser()
@@ -107,6 +119,10 @@ public class Access
                 plan.getUserDesiredCourses().Add(element.getClassName());
                 Console.WriteLine(plan.getUserDesiredCourses()[0]);
                 return element;
+            }
+            else
+            {
+                Console.WriteLine("Invalid class. Please try again.");
             }
         }
 
