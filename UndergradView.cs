@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 
-public class UndergradView
+public class UndergradView : Courses
 {
-    private string className;
     private List<String> userDesiredCourses;
 
-    UndergradView(string _className)
+    public UndergradView()
+        : base()
     {
-        className = _className;
         userDesiredCourses = new List<String>();
     }
 
@@ -16,13 +15,8 @@ public class UndergradView
         return userDesiredCourses;
     }
 
-    public string getClassName()
+    public override string ToString()
     {
-        return className;
-    }
-
-    public void setClassName(string _className)
-    {
-        className = _className;
+        return "";
     }
 }

@@ -6,7 +6,7 @@ public class Access
 {
     private List<Courses> listOfGenEds = new List<Courses>();
     private List<Courses> listOfElectives = new List<Courses>();
-    private UndergradView
+    private UndergradView plan = new UndergradView();
     Courses defaultCourse = new Courses();
 
     public Access()
@@ -53,7 +53,8 @@ public class Access
     public void userArrayChoice()
     {
         int choice = 0;
-        while (choice != 3)
+        //string YesOrNo;
+        while (choice != 3 )
         {
             Console.WriteLine("What type of class? Choose one below:");
             Console.WriteLine(@"   1. General Education Class" + Environment.NewLine +
@@ -69,15 +70,20 @@ public class Access
                         Console.WriteLine(course.ToString());
                     }
 
-                    findCourseForUser();
+                    findGenEdForUser();
+                    Console.WriteLine(Environment.NewLine + "Choose another class or exit!");
 
-                    break;
+                    continue;
                 case 2: // elective
                     foreach (Courses course in listOfElectives)
                     {
                         Console.WriteLine(course.ToString());
                     }
-                    break;
+
+                    findElectiveForUser();
+                    Console.WriteLine(Environment.NewLine + "Choose another class or exit!");
+
+                    continue;
                 case 3: // exit
                     Console.WriteLine("Bye bye!");
                     break;
@@ -88,7 +94,7 @@ public class Access
         } // end while
     }
 
-    public Courses findCourseForUser()
+    public Courses findGenEdForUser()
     {
         Console.WriteLine("Please write the class code (i.e. ITSC) and class ID (i.e. 1212) of the class you want!");
         string classChoice = Console.ReadLine();
@@ -98,6 +104,8 @@ public class Access
             if ((element.getClassCode() + element.getClassID()) == classChoice)
             {
                 Console.WriteLine("You chose " + element.getClassName() + "!");
+                plan.getUserDesiredCourses().Add(element.getClassName());
+                Console.WriteLine(plan.getUserDesiredCourses()[0]);
                 return element;
             }
         }
@@ -105,16 +113,23 @@ public class Access
         return defaultCourse;
     }
 
-    // public Courses findElectiveForUser(string course)
-    // {
-    //     foreach (Courses course in listOfElectives)
-    //     {
-    //         if ((course.getClassCode() + course.getClassID()).equals(course))
-    //         {
-    //             return course;
-    //         }
-    //     }
-    // }
+    public Courses findElectiveForUser()
+    {
+        Console.WriteLine("Please write the class code (i.e. ITSC) and class ID (i.e. 1212) of the class you want!");
+        string classChoice = Console.ReadLine();
+
+        foreach (Courses element in listOfElectives)
+        {
+            if ((element.getClassCode() + element.getClassID()) == classChoice)
+            {
+                Console.WriteLine("You chose " + element.getClassName() + "!");
+                plan.getUserDesiredCourses().Add(element.getClassName());
+                return element;
+            }
+        }
+
+        return defaultCourse;
+    }
 
     // Getters for each of the class Lists.
     public List<Courses> getGenEdsList()
@@ -125,5 +140,10 @@ public class Access
     public List<Courses> getElectivesList()
     {
         return listOfElectives;
+    }
+
+    public UndergradView getPlan()
+    {
+        return plan;
     }
 } // end Access class
