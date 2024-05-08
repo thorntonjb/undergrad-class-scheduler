@@ -13,6 +13,14 @@ public class Courses
         className = _className;
     }
 
+    public Courses()
+    {
+        classType = "";
+        classCode = "";
+        classID = 0;
+        className = "";
+    }
+
     public string getClassType()
     {
         return classType;
@@ -51,6 +59,11 @@ public class Courses
     public void setClassName(string _className)
     {
         className = _className;
+    }
+
+    public override string ToString()
+    {
+        return $"| {this.classCode}{this.classID}: {this.className}";
     }
 
 
